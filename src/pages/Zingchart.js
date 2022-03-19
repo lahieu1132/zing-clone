@@ -6,7 +6,7 @@ import React, { useState } from "react";
   
     return (
       <div className="text-cemter pt-24 text-white overflow-y-scroll h-full">
-          <h1>Final Space Characters</h1>
+          <h1>Lã Trung Hiếu</h1>
           
       </div>
     );
