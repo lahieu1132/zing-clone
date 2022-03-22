@@ -12,12 +12,13 @@ function App() {
   const {currentUser} = useAuth()
   const {playing} = useControl()
   const [showPlayer, setshowPlayer] = useState(false)
+  console.log(showPlayer);
   
   useEffect(()=>{
     currentUser ? setshowPlayer(true) : setshowPlayer(false)
   },[currentUser])
   useEffect(()=>{
-    setshowPlayer(true)
+    playing && setshowPlayer(true)
   },[playing])
 
   return (

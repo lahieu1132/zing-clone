@@ -14,7 +14,7 @@ function Home() {
 
   return (
     <div className=" h-full w-full mt-[70px] overflow-y-scroll ">
-        <div className=" w-full items-center px-14 pb-28">
+        <div className=" w-full items-center px-2 sm:px-14 pb-28">
           <Sliders />
           {currentUser && <PlaylistRowSmall playlistItems={myPlaylist} title='Gần Đây'/>}
           <PlaylistRowBig playlistItems={playlistToday} title='lựa chọn hôm nay' />
