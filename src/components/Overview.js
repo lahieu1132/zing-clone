@@ -24,14 +24,13 @@ function Overview() {
 
   useEffect(()=>{
     const timer =  () => {
-         if(slide3 < imgs.length){
-           setSlide2(slide3)
+         if(slide3 < imgs.length - 1){
           setSlide3(slide3 + 1)
         } 
         else {
-          setSlide2(slide3)
           setSlide3(0)
         }
+        setSlide2(slide3)
     }
     setTimeout(timer, 2000)
 

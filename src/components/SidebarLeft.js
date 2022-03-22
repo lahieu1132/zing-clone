@@ -9,12 +9,12 @@ import {FiMusic} from 'react-icons/fi'
 import {BiCategoryAlt, BiStar} from 'react-icons/bi'
 import {AiOutlinePlus} from 'react-icons/ai'
 
-function SidebarLeft() {
+function SidebarLeft({showPlayer}) {
 
   const {currentUser, signInWithGoogle} = useAuth()
 
   return (
-    <div className="w-[70px] lg:w-[240px]  flex flex-col bg-[#231b2e] transition-all z-50" >
+    <div className="w-[70px] lg:w-[240px]  flex flex-col bg-[#231b2e] transition-all z-30" >
         <Link to='/' className='sidebar-brand fixed '>
             <button>
             </button>
@@ -59,7 +59,7 @@ function SidebarLeft() {
           </ul>
         </div>
         <div className='h-[.5px] bg-slate-500 w-8 lg:w-[80%] mx-auto'></div>
-        <div className='sidebar-scroll sidebar overflow-y-scroll mb-36 mt-5 w-full h-full relative '>
+        <div className={`sidebar-scroll sidebar overflow-y-scroll ${showPlayer ? 'mb-36' : 'mb24'} mt-5 w-full h-full relative`}>
             <ul className=''> 
               <li className='w-full' title='Nhạc mới'>
                 <NavLink activeclassname='active' className='h-[54px] lg:h-[38px] flex flex-row items-center py-[9px] pl-6 border-l-[3px] border-transparent text-[#dadada] hover:text-white text-sm font-[700]' to='/nhacmoi' >
@@ -142,14 +142,16 @@ function SidebarLeft() {
             </div>
             }
         </div>
-        <div className='hidden lg:flex items-center text-white border-t  border-[#ccc] fixed bottom-[90px] py-2 px-6 w-[70px] lg:w-[240px] h-14'>
-          <AiOutlinePlus /> 
-          <span className='text-sm font-semibold'>Tạo playlist mới</span>
-        </div>
-        <div className='lg:hidden flex items-center justify-center fixed bottom-[90px] py-2 px-6 w-[70px] lg:w-[240px] h-14'>
-            <div className='text-white border-[#ccc] border p-2 rounded-full'>
-              <BsChevronRight /> 
-            </div>
+        <div className={`fixed ${showPlayer ? 'bottom-[90px]' :'bottom-0'} py-2 px-6 w-[70px] lg:w-[240px] h-14`}>
+          <div className='hidden h-full w-full lg:flex items-center text-white border-t  border-[#ccc] '>
+            <AiOutlinePlus /> 
+            <span className='text-sm font-semibold'>Tạo playlist mới</span>
+          </div>
+          <div className='lg:hidden h-full w-full flex items-center justify-center '>
+              <div className='text-white border-[#ccc] border p-2 rounded-full'>
+                <BsChevronRight /> 
+              </div>
+          </div>
         </div>
     </div>
   )

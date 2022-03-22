@@ -1,5 +1,5 @@
 import {NavLink,Outlet} from 'react-router-dom'
-import {BsThreeDots} from 'react-icons/bs'
+import {BsThreeDots,BsArrowRightSquare} from 'react-icons/bs'
 import {useAuth} from '../context/AuthContext'
 
 
@@ -24,11 +24,21 @@ function Personal() {
                     <div className='ml-32 flex '>
                       <button className='py-1 px-4 rounded-2xl text-sm uppercase bg-[#ffdb00] hover:bg-[#e5c500]'>Nâng cấp vip</button>
                       <button className='py-1 px-4 rounded-2xl text-sm uppercase text-white mx-2 bg-[#ffffff1a]'>Nhập code vip</button>
-                      <button className='text-white text-lg p-1 rounded-full bg-[#ffffff1a]'
-                        onClick={handleSignOut} 
-                      >
-                        <BsThreeDots/>
-                      </button>
+                     <div className='relative'>
+                        <button className='text-white text-lg p-1 rounded-full bg-[#ffffff1a]'
+                            onClick={()=>{
+                              document.getElementById('user-profile__menu').classList.toggle('active')
+                            }}
+                          >
+                            <BsThreeDots/>
+                        </button>
+                        <button id='user-profile__menu' className=' absolute hidden   flex-row items-center bg-[#432275] rounded-md mt-1 p-3 gap-2 text-white text top-full right-0 w-[210px] h-11'
+                          onClick={handleSignOut} 
+                        >
+                          <BsArrowRightSquare />
+                          <span>Đăng xuất</span>
+                          </button>
+                     </div>
                     </div>
                   </div>
                   <div className='w-full'>

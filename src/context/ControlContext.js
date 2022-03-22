@@ -33,7 +33,6 @@ function ControlProvider({children}) {
     });
   },[])
 
-
   useEffect(() => {
     setNextSongIndex(() => {
       if (currentSongIndex + 1 > songs.length - 1) {

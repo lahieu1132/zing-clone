@@ -249,3 +249,11 @@ svg circle {
 .overview-music:hover .overview-play-btn{
   display: flex;
 }
+
+.menu-dropdown--active {
+  display: flex;
+}
+
+#user-profile__menu.active{
+  display: flex;
+}

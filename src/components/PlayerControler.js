@@ -31,7 +31,7 @@ function PlayerControler() {
       handleRemoveList(film) : handleAddList(film)   
     }
   return ( 
-    <div className="fixed bottom-0 left-0 right-0 h-[90px] flex flex-row justify-between items-center bg-[#120c1c] z-50 px-6">
+    <div className="fixed bottom-0 left-0 right-0 h-[90px] z-40 flex flex-row justify-between items-center bg-[#120c1c] px-6">
         <audio ref={audioRef} src={songs[currentSongIndex]?.preview || 'https://tainhac123.com/listen/yeu-duong-kho-qua-thi-chay-ve-khoc-voi-anh-erik.B6rEC4ZEO7oD.html'}
           onTimeUpdate={(e)=>setCurrentTime(e.target.currentTime)}
           onEnded={(e)=>{

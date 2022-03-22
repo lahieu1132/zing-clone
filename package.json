@@ -8,11 +8,14 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/react-beautiful-dnd": "^13.1.2",
     "axios": "^0.26.0",
+    "chart.js": "^3.7.1",
     "disconnect": "^1.2.2",
+    "faker": "^6.6.6",
     "firebase": "^9.6.8",
     "querystring": "^0.2.1",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
+    "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.2",
@@ -29,7 +32,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",

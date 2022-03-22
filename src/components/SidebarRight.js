@@ -2,10 +2,22 @@ import React, { useEffect, useState } from "react"
 import { useControl } from "../context/ControlContext"
 import SongDetail from '../components/SongDetail'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import {useAuth} from '../context/AuthContext'
+import {FaPlay} from 'react-icons/fa'
 
 function SidebarRight() {
   const [show, setShow] = useState(false)
-  const {songs,currentSongIndex,handleSetSongs,handleSetCurrentSongIndex} = useControl()
+  const [empty, setEmpty] = useState(false)
+  const {songs,currentSongIndex,handleSetSongs,handleSetCurrentSongIndex,playing} = useControl()
+  const {currentUser} = useAuth()
+
+  useEffect(()=>{
+    currentUser ? setEmpty(true) : setEmpty(false)
+  },[currentUser])
+
+  useEffect(()=>{
+    playing && setEmpty(true)
+   },[playing])
 
     useEffect(()=>{
       const timer = ()=>{
@@ -38,7 +50,7 @@ function SidebarRight() {
       
       updateCharacters(items);
       handleSetSongs(items)
-      if(reorderedItem.id == songs[currentSongIndex]?.id){
+      if(reorderedItem?.id == songs[currentSongIndex]?.id){
         handleSetCurrentSongIndex(result.destination.index)
       }
     }
@@ -58,29 +70,37 @@ function SidebarRight() {
           </div>
         </div>
       </div>
-      <div className="flex-grow overflow-y-scroll pb-24">
+      { !empty ?
+        <div className="flex-grow relative ">
+          <div className="w-[285px] h-[240px] ml-3"
+            style={{
+              background:'url(https://zmp3-static.zadn.vn/skins/zmp3-v6.1/images/backgrounds/bg-empty-dark.svg)  50%/cover no-repeat',
+            }}
+          ></div>
+        </div> :
 
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId="characters">
-            {(provided) => (
-              <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
-                {characters.map((song, index) => {
-                  return (
-                    <Draggable key={song.id} draggableId={song.id.toString()} index={index}>
-                      {(provided) => (
-                        <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                          <SongDetail song={song} i={index}/>
-                        </li>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </ul>
-            )}
-          </Droppable>
-        </DragDropContext>
-      </div>
+      <div className="flex-grow overflow-y-scroll pb-24">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="characters">
+              {(provided) => (
+                <ul className="characters" {...provided.droppableProps} ref={provided.innerRef}>
+                  {characters?.map((song, index) => {
+                    return (
+                      <Draggable key={song.id} draggableId={song.id.toString()} index={index}>
+                        {(provided) => (
+                          <li ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                            <SongDetail song={song} i={index}/>
+                          </li>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+      </div>}
     </div>
   )
 }
