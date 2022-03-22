@@ -10,7 +10,7 @@ import {useControl} from './context/ControlContext'
 
 function App() {
   const {currentUser} = useAuth()
-  const {playing} = useControl()
+  const {playing,songs} = useControl()
   const [showPlayer, setshowPlayer] = useState(false)
   console.log(showPlayer);
   
@@ -18,8 +18,9 @@ function App() {
     currentUser ? setshowPlayer(true) : setshowPlayer(false)
   },[currentUser])
   useEffect(()=>{
-    playing && setshowPlayer(true)
-  },[playing])
+    setshowPlayer(true)
+  },[songs])
+
 
   return (
     <div className='App w-screen overflow-hidden h-screen flex bg-[hsla(0,0%,100%,0.05)]'>

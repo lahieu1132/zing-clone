@@ -70,7 +70,7 @@ function SidebarRight() {
           </div>
         </div>
       </div>
-      { !empty ?
+      { !songs ?
         <div className="flex-grow relative ">
           <div className="w-[285px] h-[240px] ml-3"
             style={{

@@ -34,7 +34,7 @@ function PlaylistRowBig(props) {
         <div className="text-white text-xl capitalize font-[700] flex justify-between items-center">
             <h1>{props.title}</h1>
         </div>
-        <div className="my-6 w-full grid grid-cols-4 lg:grid-cols-5 gap-8">
+        <div className="my-6 w-full grid grid-cols-4 xl:grid-cols-5 gap-8">
             {
                 props.playlistItems?.slice(0,lenght).map((song,idx)=>(
                 <div className='w-full' key={idx}>

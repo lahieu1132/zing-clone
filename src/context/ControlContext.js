@@ -13,25 +13,25 @@ function ControlProvider({children}) {
   const [playing, setPlaying] = useState(false);
   const [loop, setLoop] =useState(false)
   const [random, setRandom] = useState(false)
-  const [songs, setSongs] = useState([])
+  const [songs, setSongs] = useState(storageSongs || [])
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [nextSongIndex, setNextSongIndex] = useState(1);
 
-  useEffect(()=>{
-    const options = {
-        method: 'GET',
-      url: 'https://deezerdevs-deezer.p.rapidapi.com/album/119606',
-      headers: {
-        'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
-        'x-rapidapi-key': '977515bff3msha4c2843ddb77030p139c38jsn052949c039f9'
-      }
-      };
-    axios.request(options).then(function (response) {
-      setSongs(storageSongs || response.data.tracks.data); 
-    }).catch(function (error) {
-      console.error(error);
-    });
-  },[])
+  // useEffect(()=>{
+  //   const options = {
+  //       method: 'GET',
+  //     url: 'https://deezerdevs-deezer.p.rapidapi.com/album/119606',
+  //     headers: {
+  //       'x-rapidapi-host': 'deezerdevs-deezer.p.rapidapi.com',
+  //       'x-rapidapi-key': '977515bff3msha4c2843ddb77030p139c38jsn052949c039f9'
+  //     }
+  //     };
+  //   axios.request(options).then(function (response) {
+  //     setSongs(storageSongs || response.data.tracks.data); 
+  //   }).catch(function (error) {
+  //     console.error(error);
+  //   });
+  // },[])
 
   useEffect(() => {
     setNextSongIndex(() => {
