@@ -20,6 +20,7 @@ function Header() {
     const [focus, setFocus] = useState(false)
     const [valueSearch, setValueSearch] = useState('')
     const [modalDisplay, setModalDisplay] = useState(false)
+    const [settingShow, setSettingShow] = useState(false)
     const [result, setResult] = useState([])
     const {signInWithGoogle,currentUser} = useAuth()
     const SearchRef = useRef();
@@ -29,7 +30,8 @@ function Header() {
     const navigate = useNavigate() 
     const menuSettingRef = useRef()
 
-    const handleFocus = () => {
+    const handleFocus = (e) => {
+        e.stopPropagation()
         setFocus(true)
     }
     const handleBlur = () =>{
@@ -59,12 +61,16 @@ function Header() {
             else setResult([])
         })
     }
-    window.onclick = function(event) {
-        if (event.target !== resultRef.current && event.target !== inputRef.current) {
-            handleBlur()
-        }
-      }
+    
+    useEffect(()=>{
+        
+        },[])
+        window.onclick = function(){
+            focus && setFocus(false)
+            if(settingShow) setSettingShow(false)
 
+        }
+        
   return (
     <div className="flex z-50 h-[70px] fixed left-[70px] pr-14 xl:right-[330px] lg:left-60 right-0 top-0 bg-[#170f23]  xl:pr-14 pl-14">
             {modalDisplay && <Modal setModalDisplay={setModalDisplay} >
@@ -311,10 +317,12 @@ function Header() {
                         className={`"w-full flex-grow min-w-[300px] py-2 text-sm  ${focus ? 'bg-[#432275]' : 'bg-[#312739]'} font-[600] pl-10 text-white rounded-3xl  outline-none "`}
                         type="text" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..."
                         onChange={(e)=>onChange(e)}
-                        onFocus={handleFocus}
+                        onFocus={(e)=>handleFocus(e)}
+                        onClick={(e)=>e.stopPropagation()}
                         />
                     <div  
                         ref={resultRef}
+                        onClick={(e)=>{e.stopPropagation()}}
                     className={`absolute resultRef  ${focus ? 'block' : 'hidden' } top-[36px] p-3 left-0 w-full bg-[#432275] rounded-b-3xl`}>
                         <ul>   
                             <h2 className="text-sm font-bold pl-2">Đề xuất cho bạn</h2>
@@ -405,13 +413,16 @@ function Header() {
                <div className="relative">
                 <button 
                     className="w-9 h-9 text-xl ml-3 text-white rounded-full bg-[#312739] hover:bg-[#2d2537] flex items-center justify-center" 
-                            onClick={()=>{
-                                menuSettingRef.current.classList.toggle('menu-dropdown--active')
+                            onClick={(e)=>{
+                                e.stopPropagation()
+                                setSettingShow(!settingShow)
                             }}
                     >
                         <AiFillSetting  />
                     </button>
-                <div ref={menuSettingRef} className="absolute hidden bg-[#432275] rounded-lg mt-4 top-full right-0 flex-col w-[240px]  items-center justify-center">
+                {settingShow && <div ref={menuSettingRef} className="menuSettingRef absolute flex bg-[#432275] rounded-lg mt-4 top-full right-0 flex-col w-[240px]  items-center justify-center"
+                    onClick={(e)=>e.stopPropagation()}
+                >
                     <ul className="w-full py-[10px] border-b border-[#ffffff1a]">
                         <li className="cursor-pointer hover:bg-[#ffffff1a] flex flex-row pl-5 pr-4 py-3 w-full items-center text-xl font-medium text-[#dadada]">
                             <FcCancel />
@@ -452,7 +463,7 @@ function Header() {
                             <MdSecurity />
                             <span className="text-sm">Chính sách bảo mật</span></li>
                     </ul>
-                </div>
+                </div>}
                </div>
                 <button 
                 className="w-9 h-9 text-xl ml-3 text-white rounded-full bg-[#312739] hover:bg-[#2d2537] flex items-center justify-center" 

@@ -250,10 +250,5 @@ svg circle {
   display: flex;
 }
 
-.menu-dropdown--active {
-  display: flex;
-}
 
-#user-profile__menu.active{
-  display: flex;
-}
+

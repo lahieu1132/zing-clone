@@ -1,3 +1,5 @@
+import React,{useState,useRef,useEffect} from "react";
+
 import {NavLink,Outlet} from 'react-router-dom'
 import {BsThreeDots,BsArrowRightSquare} from 'react-icons/bs'
 import {useAuth} from '../context/AuthContext'
@@ -5,7 +7,24 @@ import {useAuth} from '../context/AuthContext'
 
 function Personal() {
   const {currentUser, signInWithGoogle, handleSignOut} = useAuth()
+  const [signOutForm, setSignOutForm] = useState(false)
+  const signOutFormRef = useRef();
   
+  useEffect(() => {
+    const handleClick = ()=>{
+      signOutForm && setSignOutForm(false)
+    }
+    // window.addEventListener('click',handleClick)
+  
+    // return () => {
+    //   window.removeEventListener('click',handleClick);
+    // };
+    window.onclick = function(){
+      handleClick()
+  }
+  }, []);
+  
+
   return (
     <div className="pt-20 px-14 overflow-y-scroll  h-full">
       {
@@ -26,18 +45,22 @@ function Personal() {
                       <button className='py-1 px-4 rounded-2xl text-sm uppercase text-white mx-2 bg-[#ffffff1a]'>Nhập code vip</button>
                      <div className='relative'>
                         <button className='text-white text-lg p-1 rounded-full bg-[#ffffff1a]'
-                            onClick={()=>{
-                              document.getElementById('user-profile__menu').classList.toggle('active')
+                            onClick={(e)=>{
+                              e.stopPropagation()
+                              setSignOutForm(!signOutForm)
                             }}
                           >
                             <BsThreeDots/>
                         </button>
-                        <button id='user-profile__menu' className=' absolute hidden   flex-row items-center bg-[#432275] rounded-md mt-1 p-3 gap-2 text-white text top-full right-0 w-[210px] h-11'
-                          onClick={handleSignOut} 
+                        {signOutForm && <button ref={signOutFormRef} className=' absolute flex  flex-row items-center bg-[#432275] rounded-md mt-1 p-3 gap-2 text-white text top-full right-0 w-[210px] h-11'
+                          onClick={(e)=>{
+                            e.stopPropagation()
+                            handleSignOut()
+                          }} 
                         >
                           <BsArrowRightSquare />
                           <span>Đăng xuất</span>
-                          </button>
+                          </button>}
                      </div>
                     </div>
                   </div>
